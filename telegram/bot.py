@@ -32,6 +32,12 @@ class Bot:
             chat_id: The id of the chat to send the photo to
             photo: The path to the photo to send
         """
+        data = {
+            'chat_id' : chat_id,
+            'photo' : photo
+        }
+        response = requests.get(self.base_url + 'sendPhoto', data = data)
+        return response.json()
         
     def send_document(self, chat_id, document):
         """
@@ -41,6 +47,13 @@ class Bot:
             chat_id: The id of the chat to send the document to
             document: The path to the document to send
         """
+        data={
+            'chat_id':chat_id,
+            'document':document
+        }
+        response=requests.post(self.base_url + 'sendDocument',data=data)
+        return response.json()
+
 
     def send_audio(self, chat_id, audio):
         """
@@ -51,7 +64,13 @@ class Bot:
             audio: The path to the audio to send
         """
 
-    def send_video(self, chat_id, video):
+        data = {
+            'chat_id' : chat_id,
+            'audio' : audio
+        }
+        response = requests.post(self.base_url + 'sendAudio', data=data)
+        return response.json()
+    def send_video(self, chat_id, video,caption):
         """
         This method sends a video to a specific chat
 
@@ -59,7 +78,13 @@ class Bot:
             chat_id: The id of the chat to send the video to
             video: The path to the video to send
         """
-
+        data = {
+        'chat_id': chat_id,
+        'video': video,
+        'caption': caption
+             }
+        respond = requests.post(self.base_url + 'sendVideo',data=data)
+        return respond.json()
     def send_voice(self, chat_id, voice):
         """
         This method sends a voice to a specific chat
@@ -68,7 +93,12 @@ class Bot:
             chat_id: The id of the chat to send the voice to
             voice: The path to the voice to send
         """
-
+        data = {
+            'chat_id' : chat_id,
+            'voice' : voice
+        }
+        respond = requests.post(self.base_url + 'sendVoice', data=data)
+        return respond.json()
     def get_updates(self):
         """
         This method returns updates from the bot
@@ -76,4 +106,4 @@ class Bot:
         response = requests.get(self.base_url + "getUpdates")
         return response.json()
 
-    # Add more methods here
+
